@@ -29,9 +29,13 @@ Execute below command:
 ### Step 1. Pull the image
 ` docker pull rinormaloku/postgres-back-up `
 
-
 ### Step 2. Run and map to your drive (e.g. /d/backup)
 ` docker run -v /host/backup:/pg_backup rinormaloku/postgres-back-up `
+
+### Step 2.1. Dump options
+
+- You can set prefix for dump filename setting PREFIX env variable
+- You can exclude tables by pattern setting EXCLUDE  env variable
 
 ## Contributing and Modifying
 
@@ -44,3 +48,9 @@ Execute below command:
 ` docker run -v /d/backup:/pg_backup $DOCKER_USER/postgres-back-up `
 
 3. Verify that it is an improvement and commit your changes ;)
+
+### Changelog
+
+- upgrade docker image to alpine:edge which is compatible with pg_dump 12.1
+- add prefix for dump filename 
+- add table exclusion pattern

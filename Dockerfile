@@ -1,4 +1,6 @@
-FROM alpine:3.6
+FROM alpine:edge
+
+# pg_dump version 12.1
 
 ENV PGHOST='localhost'
 ENV PGPORT='5432'

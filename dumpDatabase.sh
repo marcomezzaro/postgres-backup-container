@@ -1,9 +1,16 @@
-DUMP_FILE_NAME="backupOn`date +%Y-%m-%d-%H-%M`.dump"
+#!/bin/bash
+DUMP_PREFIX=${PREFIX}
+DUMP_FILE_NAME="${DUMP_PREFIX}-`date +%Y-%m-%d-%H-%M`.dump"
+EXCLUDE_TABLE=${EXCLUDE}
 echo "Creating dump: $DUMP_FILE_NAME"
 
 cd pg_backup
 
-pg_dump -C -w --format=c --blobs > $DUMP_FILE_NAME
+if [ -n ${EXCLUDE_TABLE} ]; then
+    pg_dump -C -w --format=c --blobs -T ${EXCLUDE_TABLE} > $DUMP_FILE_NAME 
+else
+    pg_dump -C -w --format=c --blobs > $DUMP_FILE_NAME
+fi
 
 if [ $? -ne 0 ]; then
   rm $DUMP_FILE_NAME
